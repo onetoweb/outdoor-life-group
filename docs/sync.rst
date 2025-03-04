@@ -32,7 +32,7 @@ Yields stock data using the Generator syntax.
 .. code-block:: php
     
     $generator = $client->sync->stock();
-    foreach ($generator as $product) {
+    foreach ($generator as $stock) {
         
     }
 
