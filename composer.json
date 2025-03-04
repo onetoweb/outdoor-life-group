@@ -1,0 +1,32 @@
+{
+    "name": "onetoweb/outdoor-life-group",
+    "description": "Outdoor Life Group API Client",
+    "keywords": [
+        "api",
+        "php",
+        "outdoor life group"
+    ],
+    "type": "library",
+    "homepage": "https://github.com/onetoweb/outdoor-life-group",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jonathan van 't Ende",
+            "email": "jvantende@onetoweb.nl"
+        }
+    ],
+    "require": {
+        "php": ">=7.2.0",
+        "guzzlehttp/guzzle": "^6.0 || ^7.0",
+        "ralouphie/mimey": "^1.0 || ^2.0",
+        "symfony/polyfill-php83": "^1.0"
+    },
+    "require-dev": {
+        "symfony/error-handler": "^5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Onetoweb\\OutdoorLifeGroup\\": "src/"
+        }
+    }
+}
