@@ -49,7 +49,7 @@ class Sync extends AbstractEndpoint
                 $query = ['continuationToken' => $this->client->getContinuationToken()];
             }
             
-            $response = $this->client->get('/sync/products', $query);
+            $response = $this->client->get('/sync/stock', $query);
             
             foreach ($response['results'] as $product) {
                 yield $product;
