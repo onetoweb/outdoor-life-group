@@ -11,13 +11,13 @@ use Generator;
 class Sync extends AbstractEndpoint
 {
     /**
+     * @param array $query = []
+     * 
      * @return Generator
      */
-    public function products(): Generator
+    public function products(array $query = []): Generator
     {
         do {
-            
-            $query = [];
             
             if ($this->client->getContinuationToken() !== null) {
                 $query = ['continuationToken' => $this->client->getContinuationToken()];
@@ -37,13 +37,13 @@ class Sync extends AbstractEndpoint
     }
     
     /**
+     * @param array $query = []
+     * 
      * @return Generator
      */
-    public function stock(): Generator
+    public function stock(array $query = []): Generator
     {
         do {
-            
-            $query = [];
             
             if ($this->client->getContinuationToken() !== null) {
                 $query = ['continuationToken' => $this->client->getContinuationToken()];
