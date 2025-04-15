@@ -18,7 +18,7 @@ class Client
      * Base href
      */
     public const BASE_HREF_TEST = 'https://apim-olg-ipaas-main-acc.azure-api.net';
-    public const BASE_HREF_LIVE = 'https://apim-olg-ipaas-main-prd.azure-api.net';
+    public const BASE_HREF_LIVE = 'https://api.outdoorlifegroup.nl';
     
     /**
      * Methods.

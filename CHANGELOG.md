@@ -11,3 +11,4 @@
 ## [1.0.2] - 2025-04-14
 
 - Add query param to sync endpoint.
+- Change live base href.
