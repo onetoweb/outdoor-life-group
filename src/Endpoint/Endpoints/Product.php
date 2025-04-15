@@ -26,7 +26,7 @@ class Product extends AbstractEndpoint
      * 
      * @return array
      */
-    public function get(string $id, array $query = []): array
+    public function get(string $id, array $query = []): ?array
     {
         return $this->client->get("/products/$id", $query);
     }
@@ -37,7 +37,7 @@ class Product extends AbstractEndpoint
      * 
      * @return array
      */
-    public function getV2(string $id, array $query = []): array
+    public function getV2(string $id, array $query = []): ?array
     {
         return $this->client->get("/products/v2/$id", $query);
     }
@@ -58,20 +58,15 @@ class Product extends AbstractEndpoint
      * 
      * @return array|null
      */
-    public function listById(array $ids): ?array
+    public function listById(array $ids): array
     {
-        $productIds = [];
-        
-        foreach ($ids as $id) {
-            
-            $productIds[] = [
-                'productId' => (string) $id
+        $data['products'] = array_map(function($value) {
+            return [
+                'productId' => (string) $value
             ];
-        }
+        }, $ids);
         
-        return $this->client->post('/products/products', [
-            'products' => $productIds
-        ]);
+        return $this->client->post('/products/products', $data);
     }
     
     /**
@@ -81,18 +76,13 @@ class Product extends AbstractEndpoint
      */
     public function listByIdV2(array $ids): ?array
     {
-        $productIds = [];
-        
-        foreach ($ids as $id) {
-            
-            $productIds[] = [
-                'productId' => (string) $id
+        $data['products'] = array_map(function($value) {
+            return [
+                'productId' => (string) $value
             ];
-        }
+        }, $ids);
         
-        return $this->client->post('/products/v2/products', [
-            'products' => $productIds
-        ]);
+        return $this->client->post('/products/v2/products', $data);
     }
     
     /**
