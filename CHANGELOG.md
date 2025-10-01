@@ -12,3 +12,7 @@
 
 - Add query param to sync endpoint.
 - Change live base href.
+
+## [1.0.3] - 2025-10-01
+
+- Disable ssl verification.

@@ -183,6 +183,7 @@ class Client
             ],
             RequestOptions::JSON => $data,
             RequestOptions::QUERY => $query,
+            RequestOptions::VERIFY => false,
         ];
         
         // make request
