@@ -4,6 +4,7 @@ namespace Onetoweb\OutdoorLifeGroup;
 
 use Onetoweb\OutdoorLifeGroup\Endpoint\Endpoints;
 use Onetoweb\OutdoorLifeGroup\Endpoint\EndpointInterface;
+use Onetoweb\OutdoorLifeGroup\Config\Method;
 use Onetoweb\Exception\CustomerIdException;
 use GuzzleHttp\RequestOptions;
 use GuzzleHttp\Client as GuzzleCLient;
@@ -21,47 +22,35 @@ class Client
     public const BASE_HREF_LIVE = 'https://api.outdoorlifegroup.nl';
     
     /**
-     * Methods.
-     */
-    public const METHOD_GET = 'GET';
-    public const METHOD_POST = 'POST';
-    
-    /**
      * @var string
      */
-    private $apiKey;
-    
-    /**
-     * @var bool
-     */
-    private $testModus;
-    
-    /**
-     * @var string
-     */
-    private $acceptLanguage = 'nl-NL';
+    private string $acceptLanguage = 'nl-NL';
     
     /**
      * @var int|null
      */
-    private $customerId;
+    private ?int $customerId = null;
     
     /**
      * @var string|null
      */
-    private $contentType;
+    private ?string $contentType = null;
     
     /**
      * @var string|null
      */
-    private $continuationToken;
+    private ?string $continuationToken = null;
     
     /**
      * @param string $apiKey
      * @param bool $testModus = true
      */
-    public function __construct(string $apiKey, bool $testModus = true)
-    {
+    public function __construct(
+        
+        #[\SensitiveParameter]
+        private string $apiKey,
+        private bool $testModus = true
+    ) {
         $this->apiKey = $apiKey;
         $this->testModus = $testModus;
         
@@ -147,7 +136,7 @@ class Client
      */
     public function get(string $endpoint, array $query = []): ?array
     {
-        return $this->request(self::METHOD_GET, $endpoint, [], $query);
+        return $this->request(Method::GET, $endpoint, [], $query);
     }
     
     /**
@@ -159,18 +148,18 @@ class Client
      */
     public function post(string $endpoint, array $data = [], array $query = []): ?array
     {
-        return $this->request(self::METHOD_POST, $endpoint, $data, $query);
+        return $this->request(Method::POST, $endpoint, $data, $query);
     }
     
     /**
-     * @param string $method
+     * @param Method $method
      * @param string $endpoint
      * @param array $data = []
      * @param array $query = []
      * 
      * @return array|null
      */
-    public function request(string $method, string $endpoint, array $data = [], array $query = []): ?array
+    public function request(Method $method, string $endpoint, array $data = [], array $query = []): ?array
     {
         // build options
         $options = [
@@ -179,7 +168,7 @@ class Client
                 'Cache-Control' => 'no-cache',
                 'Accept-Language' => $this->acceptLanguage,
                 'Ocp-Apim-Subscription-Key' => $this->apiKey,
-                'CustomerId' => $this->customerId,
+                'CustomerId' => (string) $this->customerId,
             ],
             RequestOptions::JSON => $data,
             RequestOptions::QUERY => $query,
@@ -187,7 +176,7 @@ class Client
         ];
         
         // make request
-        $response = (new GuzzleCLient())->request($method, $this->getUrl($endpoint), $options);
+        $response = (new GuzzleCLient())->request($method->value, $this->getUrl($endpoint), $options);
         
         // get content type
         $this->contentType = $response->getHeaderLine('content-type');
