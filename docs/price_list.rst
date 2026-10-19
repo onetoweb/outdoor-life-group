@@ -52,10 +52,7 @@ Download price list
     $assetId = 42;
     $result = $client->priceList->download($assetId);
     
-    $mimes = new \Mimey\MimeTypes;
-    $extension = $mimes->getExtension($result['content-type']);
-    
-    $filename = "/path/to/file.$extension";
+    $filename = "/path/to/file.csv";
     
     file_put_contents($filename, base64_decode($result['file']));
 

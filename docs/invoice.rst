@@ -30,10 +30,7 @@ Donwload invoice
     $invoiceId = 42;
     $result = $client->invoice->download($invoiceId);
     
-    $mimes = new \Mimey\MimeTypes;
-    $extension = $mimes->getExtension($result['content-type']);
-    
-    $filename = "/path/to/file.$extension";
+    $filename = "/path/to/file.pdf";
     
     file_put_contents($filename, base64_decode($result['file']));
 

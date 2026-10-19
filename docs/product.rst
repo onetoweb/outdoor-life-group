@@ -49,10 +49,7 @@ Get product image
         'format' => 'jpg', // allowed values: jpg/png defaults to: jpg
     ]);
     
-    $mimes = new \Mimey\MimeTypes;
-    $extension = $mimes->getExtension($result['content-type']);
-    
-    $filename = "/path/to/file.$extension";
+    $filename = "/path/to/file.jpg";
     
     file_put_contents($filename, base64_decode($result['file']));
 
