@@ -26,4 +26,4 @@
 
 ## [2.1.0] - 2026-10-19
 
-- Remove ralouphie/mimey from packages
+- Remove ralouphie/mimey from package
