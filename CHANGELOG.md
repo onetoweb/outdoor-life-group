@@ -23,3 +23,7 @@
 - Drop support for guzzle 6
 - Add support for guzzle 8
 - Add SensitiveParameter attribute
+
+## [2.1.0] - 2026-10-19
+
+- Remove ralouphie/mimey from packages
